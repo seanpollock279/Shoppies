@@ -1,0 +1,9 @@
+.filmHeader {
+    background-color: #454F5B;
+}
+
+.filmHeader__title {
+    color: white;
+    font-size: 2rem;
+    padding: 1% 0 1% 5%;
+}

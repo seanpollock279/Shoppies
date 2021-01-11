@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import '@shopify/polaris/dist/styles.css';
+import { AppProvider, Form, TextField, Button, Label, Autocomplete, Icon } from '@shopify/polaris';
+import { SearchMinor } from '@shopify/polaris-icons';
 
 const Search = (props) => {
-    const [searchValue, setSeachValue] = useState('');
+    const [searchValue, setSearchValue] = useState('');
     
     const handleSearchInputChanges =  (e) => {
-        setSeachValue(e.target.value);
+        setSearchValue(e.target.value);
     }
 
     const resetInputField = () => {
@@ -18,10 +21,15 @@ const Search = (props) => {
     }
 
     return (
-        <form>
-            <input value={searchValue} onChange={handleSearchInputChanges} type='text' />
-            <input onClick={callSearchFunction} type="submit" value="SEARCH" />
-        </form>
+        <AppProvider>
+            <Form>
+
+                <input prefix={<Icon source={SearchMinor} color="inkLighter" />} value={searchValue} onChange={handleSearchInputChanges} type='text' />
+                <Button onClick={callSearchFunction} type="submit">
+                    <Label>Search</Label>
+                </Button>
+            </Form>
+        </AppProvider>
     );
 }
 

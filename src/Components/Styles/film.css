@@ -1,0 +1,21 @@
+.movie__poster {
+    height: 400px;
+}
+
+.movie__year {
+    margin-bottom: 5%;
+}
+
+.movie__title {
+    background-color: #006FBB;
+    border-radius: 5px 5px 0 0;
+    color: white;
+    padding: 2% 0 2% 0;
+}
+
+/* .filmContainer {
+    margin: 2%;
+} */
+
+
+
