@@ -23,7 +23,6 @@ const Search = (props) => {
     return (
         <AppProvider>
             <Form>
-
                 <input prefix={<Icon source={SearchMinor} color="inkLighter" />} value={searchValue} onChange={handleSearchInputChanges} type='text' />
                 <Button onClick={callSearchFunction} type="submit">
                     <Label>Search</Label>

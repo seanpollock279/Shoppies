@@ -1,4 +1,5 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import '@shopify/polaris/dist/styles.css';
 
 import './App.css';
@@ -12,6 +13,7 @@ const OMDB_API = 'http://www.omdbapi.com/?s=man&apikey=94435687';
 const initialState = {
   loading: true,
   movies: [],
+  nominations: [],
   errorMessage: null
 };
 
@@ -45,6 +47,21 @@ const reducer = (state, action) => {
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [list, setList] = useState(initialState.nominations);
+  const [mov, setMov] = useState('');
+
+  function handleChange(event) {
+    setMov(event.target.value);
+  }
+  
+  function handleAdd() {
+    const newList = list.concat({ mov, id: uuidv4() });
+
+    setList(newList);
+
+    setMov('');
+    console.log(newList)
+  }
 
     useEffect(() => {
     
@@ -96,7 +113,7 @@ const App = () => {
           <div className="errorMessage">{errorMessage}</div>
         ) : (
           movies.map((movie, index) => (
-            <Film key={`${index}-${movie.Title}`} movie={movie} />
+            <Film key={`${index}-${movie.Title}`} handleChange={handleChange} movie={movie} handleAdd={handleAdd} />
           ))
         )}
       </div>
