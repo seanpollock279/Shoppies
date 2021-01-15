@@ -7,13 +7,19 @@ import './App.css';
 import Film from "./Components/film";
 import Search from './Components/Search';
 import Header from './Components/Header';
+import Noms from './Components/Noms';
 
 const OMDB_API = 'http://www.omdbapi.com/?s=man&apikey=94435687';
 
 const initialState = {
   loading: true,
   movies: [],
-  nominations: [],
+  nominations: [
+    // // Title: '',
+    // // Year: '',
+    // Poster: '',
+    // // imdbID: ''
+  ],
   errorMessage: null
 };
 
@@ -48,19 +54,19 @@ const reducer = (state, action) => {
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [list, setList] = useState(initialState.nominations);
-  const [mov, setMov] = useState('');
+  const [mov, setMov] = useState(undefined);
 
   function handleChange(event) {
     setMov(event.target.value);
   }
   
-  function handleAdd() {
+  function handleAdd(event) {
     const newList = list.concat({ mov, id: uuidv4() });
-
+    // console.log(mov, "handleChange")
     setList(newList);
 
-    setMov('');
-    console.log(newList)
+    console.log(newList);
+    console.log(event.target.value);
   }
 
     useEffect(() => {
@@ -98,7 +104,7 @@ const App = () => {
       	});
 	  };
 
-    const { movies, errorMessage, loading } = state;
+    const { movies, errorMessage, loading, nominations } = state;
 
     return (
     <>
@@ -116,7 +122,12 @@ const App = () => {
             <Film key={`${index}-${movie.Title}`} handleChange={handleChange} movie={movie} handleAdd={handleAdd} />
           ))
         )}
+        
       </div>
+      {nominations.map((nom) => (
+          <Noms nom={nom} />
+        ))
+      }
     </div>
     </>
   );

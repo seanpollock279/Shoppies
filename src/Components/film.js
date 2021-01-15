@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '@shopify/polaris/dist/styles.css';
 import './Styles/film.css';
 
@@ -7,7 +7,6 @@ import { AppProvider, Card } from '@shopify/polaris';
 const PLACEHOLDER_IMAGE = "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg";
 
 export default function film({ movie, handleAdd, handleChange }) {
-    console.log(movie)
 
     const poster = movie.Poster === 'N/A' ? PLACEHOLDER_IMAGE : movie.Poster;
     return (
@@ -19,9 +18,8 @@ export default function film({ movie, handleAdd, handleChange }) {
                 </Card>
                 <div className="movie__btmContainer">
                     <p className="movie__year">({movie.Year})</p>
-                    <button value={movie.title} onClick={handleChange} type="button" onClick={handleAdd}>Nominate</button>
+                    <button value={movie.Poster} type="button" onClick={ (event) => { handleChange(event); handleAdd(event); }}>Nominate</button>
                 </div>
-                
             </div>
         </AppProvider>
     );
